@@ -14,10 +14,10 @@ import android.telephony.TelephonyManager;
 public class NetworkUtils {
     //private final static String TAG = DbgUtils.getTag(NetworkTools.class.getSimpleName());
 
-    //private static Context mContext = MainApplication.getContext();
+    //private static Context context = MainApplication.getContext();
 
-    public static boolean isConnectingToInternet(Context mContext) {
-        ConnectivityManager connectivity = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+    public static boolean isConnectingToInternet(Context context) {
+        ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivity != null) {
             NetworkInfo[] info = connectivity.getAllNetworkInfo();
             if (info != null)
@@ -31,16 +31,16 @@ public class NetworkUtils {
     }
 
 
-    public static String getSimNumber(Context mContext) {
-        TelephonyManager telemamanger = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
+    public static String getSimNumber(Context context) {
+        TelephonyManager telemamanger = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         //String getSimSerialNumber = telemamanger.getSimSerialNumber();
         String getSimNumber = telemamanger.getLine1Number();
 
         return getSimNumber;
     }
 
-    public static String getSimSerial(Context mContext) {
-        TelephonyManager telemamanger = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
+    public static String getSimSerial(Context context) {
+        TelephonyManager telemamanger = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         String getSimSerialNumber = telemamanger.getSimSerialNumber();
         String getSimNumber = telemamanger.getLine1Number();
 
@@ -48,17 +48,17 @@ public class NetworkUtils {
         return getSimSerialNumber;
     }
 
-    public static String getIMEI(Context mContext) {
-        TelephonyManager telemamanger = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
+    public static String getIMEI(Context context) {
+        TelephonyManager telemamanger = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         String IMEI = telemamanger.getDeviceId();
 
         return IMEI;
     }
 
-    public static String getUserName(Context mContext) {
+    public static String getUserName(Context context) {
 
         String s = null;
-        Cursor c = mContext.getContentResolver().query(ContactsContract.Profile.CONTENT_URI, null, null, null, null);
+        Cursor c = context.getContentResolver().query(ContactsContract.Profile.CONTENT_URI, null, null, null, null);
         int count = c.getCount();
         String[] columnNames = c.getColumnNames();
         boolean b = c.moveToFirst();

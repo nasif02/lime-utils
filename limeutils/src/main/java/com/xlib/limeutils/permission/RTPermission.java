@@ -14,17 +14,12 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
+import com.xlib.limeutils.base.Lc;
+
 
 public class RTPermission {
 
-//    private final int PRC_READ_CONTACTS = 11;
-//    private final int PRC_ACCESS_FINE_LOCATION = 22;
-//    private final int PRC_RECORD_AUDIO = 33;
-//    private final int PRC_WRITE_EXTERNAL_STORAGE = 44;
-//    private final int PRC_CALL_PHONE = 55;
-
-    private final static String TAG = RTPermission.class.getSimpleName();
-    //private static Context mContext = MainApplication.getContext();
+    private static final String TAG = RTPermission.class.getSimpleName() + Lc.TAG_POSTFIX;
 
     //starts with 1001
     public static final int PRC_RECORD_AUDIO = 1001;
@@ -35,7 +30,7 @@ public class RTPermission {
     public static final int PRC_READ_CONTACTS = 1006;
 
 
-    Activity activity;
+    private Activity activity;
 
 
     //Try to make this class static. mContext not working here

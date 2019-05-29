@@ -21,6 +21,8 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.xlib.limeutils.base.Lc;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,40 +31,36 @@ import java.io.OutputStream;
 public class DbHelper extends SQLiteOpenHelper {
 
 
-    //private static final String TAG = DbHelper.class.getSimpleName() + Lc.TAG_POSTFIX;
+    private static final String TAG = DbHelper.class.getSimpleName() + Lc.TAG_POSTFIX;
 
 
-
-    private static final String TAG = "xxx " + DbHelper.class.getSimpleName();
-
-
-    private static String DB_NAME;
+    private String dbName;
     private SQLiteDatabase db;
-    private static String dbPath;
-    private final Context mContext;
+    private String dbPath;
+    private final Context context;
 
     //to implement singeliton
     private static DbHelper dbHelper;
 
 
     //make it private to implement singeliton
-    public DbHelper(Context mContext, String dbName) {
+    public DbHelper(Context context, String dbName) {
 
-        super(mContext, dbName, null, 1);
-        this.mContext = mContext;
-        DB_NAME = dbName;
-        dbPath = "/data/data/" + mContext.getPackageName() + "/databases/";
+        super(context, dbName, null, 1);
+        this.context = context;
+        this.dbName = dbName;
+        dbPath = "/data/data/" + context.getPackageName() + "/databases/";
 
         //Log.d(TAG, "DbHelper: dbPath: " + dbPath);
 
-        //Log.d(TAG, "DbHelper: mContext.getFilesDir(): " + mContext.getFilesDir());
+        //Log.d(TAG, "DbHelper: context.getFilesDir(): " + context.getFilesDir());
 
     }
 
     //under construction
-    public static synchronized DbHelper getInstance(Context context){
-        if(dbHelper==null){
-            dbHelper = new DbHelper(context,"");
+    public static synchronized DbHelper getInstance(Context context) {
+        if (dbHelper == null) {
+            dbHelper = new DbHelper(context, "");
         }
         return dbHelper;
     }
@@ -112,7 +110,7 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase checkDB = null;
 
         try {
-            String myPath = dbPath + DB_NAME;
+            String myPath = dbPath + dbName;
             checkDB = SQLiteDatabase.openDatabase(myPath, null,
                     SQLiteDatabase.OPEN_READONLY);
 
@@ -139,10 +137,10 @@ public class DbHelper extends SQLiteOpenHelper {
     private void copyDataBase() throws IOException {
 
         // Open your local db as the input stream
-        InputStream myInput = mContext.getAssets().open(DB_NAME);
+        InputStream myInput = context.getAssets().open(dbName);
 
         // Path to the just created empty db
-        String outFileName = dbPath + DB_NAME;
+        String outFileName = dbPath + dbName;
 
         // Open the empty db as the output stream
         OutputStream myOutput = new FileOutputStream(outFileName);
@@ -169,12 +167,11 @@ public class DbHelper extends SQLiteOpenHelper {
     public void openDataBase() throws SQLException {
 
         // Open the database
-        String myPath = dbPath + DB_NAME;
+        String myPath = dbPath + dbName;
         //db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
 //        db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);  // read & write
 
-        db  = this.getWritableDatabase();
-
+        db = this.getWritableDatabase();
 
 
     }
@@ -182,7 +179,7 @@ public class DbHelper extends SQLiteOpenHelper {
 //    public void openDataBase2() throws SQLException {
 //
 //        // Open the database
-//        String myPath = dbPath + DB_NAME;
+//        String myPath = dbPath + dbName;
 //        db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
 //
 //    }
@@ -208,7 +205,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onConfigure(SQLiteDatabase db){
+    public void onConfigure(SQLiteDatabase db) {
         db.setForeignKeyConstraintsEnabled(true);
     }
 
@@ -456,12 +453,13 @@ public class DbHelper extends SQLiteOpenHelper {
 
     /**
      * Method to create a demo table consisting id,title,body,bookmark,category
-     *
+     * <p>
      * id           int
      * title        text
      * body         text
      * bookmark     int
      * category     text
+     *
      * @return boolean
      */
     public boolean createTableDemo() {
