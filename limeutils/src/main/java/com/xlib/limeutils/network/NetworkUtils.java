@@ -1,11 +1,14 @@
 package com.xlib.limeutils.network;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.provider.ContactsContract;
 import android.telephony.TelephonyManager;
+
+import com.xlib.limeutils.base.Contextor;
 
 
 /**
@@ -14,12 +17,19 @@ import android.telephony.TelephonyManager;
 public class NetworkUtils {
     //private final static String TAG = DbgUtils.getTag(NetworkTools.class.getSimpleName());
 
-    //private static Context context = MainApplication.getContext();
+    private static Context context = Contextor.getInstance().getContext();
 
+
+    /**
+     * Method to check internet is avalable
+     * need permission in manifest
+     * @param context
+     * @return
+     */
     public static boolean isConnectingToInternet(Context context) {
         ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivity != null) {
-            NetworkInfo[] info = connectivity.getAllNetworkInfo();
+            @SuppressLint("MissingPermission") NetworkInfo[] info = connectivity.getAllNetworkInfo();
             if (info != null)
                 for (int i = 0; i < info.length; i++)
                     if (info[i].getState() == NetworkInfo.State.CONNECTED) {
@@ -31,31 +41,31 @@ public class NetworkUtils {
     }
 
 
-    public static String getSimNumber(Context context) {
+    public static String getSimNumber() {
         TelephonyManager telemamanger = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         //String getSimSerialNumber = telemamanger.getSimSerialNumber();
-        String getSimNumber = telemamanger.getLine1Number();
+        @SuppressLint("MissingPermission") String getSimNumber = telemamanger.getLine1Number();
 
         return getSimNumber;
     }
 
-    public static String getSimSerial(Context context) {
+    public static String getSimSerial() {
         TelephonyManager telemamanger = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        String getSimSerialNumber = telemamanger.getSimSerialNumber();
-        String getSimNumber = telemamanger.getLine1Number();
+        @SuppressLint("MissingPermission") String getSimSerialNumber = telemamanger.getSimSerialNumber();
+        @SuppressLint("MissingPermission") String getSimNumber = telemamanger.getLine1Number();
 
 
         return getSimSerialNumber;
     }
 
-    public static String getIMEI(Context context) {
+    public static String getIMEI() {
         TelephonyManager telemamanger = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        String IMEI = telemamanger.getDeviceId();
+        @SuppressLint("MissingPermission") String IMEI = telemamanger.getDeviceId();
 
         return IMEI;
     }
 
-    public static String getUserName(Context context) {
+    public static String getUserName() {
 
         String s = null;
         Cursor c = context.getContentResolver().query(ContactsContract.Profile.CONTENT_URI, null, null, null, null);
