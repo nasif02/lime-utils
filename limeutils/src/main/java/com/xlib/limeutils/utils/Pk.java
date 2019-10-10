@@ -26,8 +26,6 @@ public class Pk {
     public static final String DATE_FIRST_LAUNCH = "DATE_FIRST_LAUNCH";
     public static final String LAST_OP = "LAST_OP";
 
-    //my app promote
-    public static final String ADV_1 = "ADV_1";
-    public static final String ADV_2 = "ADV_2";
+
 
 }
