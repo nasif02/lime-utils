@@ -39,23 +39,23 @@ public class AppRaterUtils {
      */
     public static void appLaunched(Context mContext) {
 
-        if (PrefUtils.getBoolean(Pk.DONT_SHOW_AGAIN, false)) {
+        if (PrefUtils.getInstance().getBoolean(Pk.DONT_SHOW_AGAIN, false)) {
             Log.d(TAG, "appLaunched: DONT_SHOW_AGAIN: true");
             return;
         }
 
         // Increment launch counter
-        long tLaunch = PrefUtils.getLong(Pk.LAUNCH_COUNTER, 0) + 1;
+        long tLaunch = PrefUtils.getInstance().getLong(Pk.LAUNCH_COUNTER, 0) + 1;
         Log.d(TAG, "appLaunched: tLaunch: " + tLaunch);
-        PrefUtils.putLong(Pk.LAUNCH_COUNTER, tLaunch);
+        PrefUtils.getInstance().putLong(Pk.LAUNCH_COUNTER, tLaunch);
 
         // Get date of first launch
-        Long dateFirstLaunch = PrefUtils.getLong(Pk.DATE_FIRST_LAUNCH, 0);
+        Long dateFirstLaunch = PrefUtils.getInstance().getLong(Pk.DATE_FIRST_LAUNCH, 0);
         Log.d(TAG, "appLaunched: dateFirstLaunch: " + dateFirstLaunch);
 
         if (dateFirstLaunch == 0) {
             dateFirstLaunch = System.currentTimeMillis();
-            PrefUtils.putLong(Pk.DATE_FIRST_LAUNCH, dateFirstLaunch);
+            PrefUtils.getInstance().putLong(Pk.DATE_FIRST_LAUNCH, dateFirstLaunch);
         }
 
         // Wait at least n days before opening
@@ -95,7 +95,7 @@ public class AppRaterUtils {
                 Log.d(TAG, "showRateDialog: Rate Button Clicked");
 
 
-                PrefUtils.putBoolean(Pk.DONT_SHOW_AGAIN, true);
+                PrefUtils.getInstance().putBoolean(Pk.DONT_SHOW_AGAIN, true);
 
                 mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri
                         .parse("market://details?id=" + appPackage)));

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.xlib.limeutils.R;
 import com.xlib.limeutils.base.Contextor;
 
 
@@ -14,17 +15,26 @@ import com.xlib.limeutils.base.Contextor;
  */
 public class PrefUtils {
 
-    private static final String TAG = PrefUtils.class.getSimpleName();
-    private static Context context = Contextor.getInstance().getContext();
+    private static final String TAG = "PrefUtils";
 
-    //system code
-    //private static final String PREF_NAME = "Default";
-    //private static SharedPreferences sp = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);   //custom
-    private static SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);    //default
-    //private static SharedPreferences.Editor ed = sp.edit();
+    private static PrefUtils sInstance=null;
+    private SharedPreferences sp;
+    private final String PREF_NAME = "shared_pref";
+
+    public static synchronized PrefUtils getInstance(){
+        if(sInstance == null)
+            sInstance = new PrefUtils();
+        return sInstance;
+    }
+
+    private PrefUtils() {
+        Context appContext = Contextor.getInstance().getContext();
+        sp = appContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE );
+        //sp = PreferenceManager.getDefaultSharedPreferences(appContext);
+    }
 
 
-    public static void putInt(String key, int value) {
+    public void putInt(String key, int value) {
 
         SharedPreferences.Editor ed = sp.edit();
         ed.putInt(key, value);
@@ -32,7 +42,7 @@ public class PrefUtils {
 
     }
 
-    public static void putLong(String key, long value) {
+    public void putLong(String key, long value) {
 
         SharedPreferences.Editor ed = sp.edit();
         ed.putLong(key, value);
@@ -40,7 +50,7 @@ public class PrefUtils {
 
     }
 
-    public static void putFloat(String key, float value) {
+    public void putFloat(String key, float value) {
 
         SharedPreferences.Editor ed = sp.edit();
         ed.putFloat(key, value);
@@ -48,7 +58,7 @@ public class PrefUtils {
 
     }
 
-    public static void putString(String key, String value) {
+    public void putString(String key, String value) {
 
         SharedPreferences.Editor ed = sp.edit();
         ed.putString(key, value);
@@ -56,7 +66,7 @@ public class PrefUtils {
 
     }
 
-    public static void putBoolean(String key, boolean value) {
+    public void putBoolean(String key, boolean value) {
 
         SharedPreferences.Editor ed = sp.edit();
         ed.putBoolean(key, value);
@@ -65,56 +75,56 @@ public class PrefUtils {
     }
 
 
-    public static int getInt(String key, int defValue) {
+    public int getInt(String key, int defValue) {
 
         return sp.getInt(key, defValue);
     }
 
-    public static long getLong(String key, long defValue) {
+    public long getLong(String key, long defValue) {
 
         return sp.getLong(key, defValue);
     }
 
-    public static boolean getBoolean(String key, boolean defValue) {
+    public boolean getBoolean(String key, boolean defValue) {
 
         return sp.getBoolean(key, defValue);
     }
 
-    public static float getFloat(String key, float defValue) {
+    public float getFloat(String key, float defValue) {
 
         return sp.getFloat(key, defValue);
     }
 
-    public static String getString(String key, String defValue) {
+    public String getString(String key, String defValue) {
 
         return sp.getString(key, defValue);
     }
 
-    public static void remove(String key) {
+    public void remove(String key) {
 
         SharedPreferences.Editor ed = sp.edit();
 
         try {
             ed.remove(key);
             ed.apply();
-            Log.d(TAG, key + " removed successfully");
+            Log.d(TAG, "remove: " + key + " removed successfully");
         } catch (Exception e) {
-            Log.e(TAG, key + " not removed successfully");
+            Log.e(TAG, "remove: " + e.getMessage(),e );
             e.printStackTrace();
         }
 
     }
 
-    public static void clear() {
+    public void clear() {
 
         SharedPreferences.Editor ed = sp.edit();
         try {
             ed.clear();
             //ed.commit();
             ed.apply();
-            Log.d(TAG, "Preference cleared successfully");
+            Log.d(TAG, "clear: Preference cleared successfully");
         } catch (Exception e) {
-            Log.e(TAG, "Preference not cleared successfully");
+            Log.e(TAG, "clear: " + e.getMessage(), e);
             e.printStackTrace();
 
         }
