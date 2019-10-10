@@ -15,7 +15,7 @@ import android.util.Log;
 
 import com.xlib.limeutils.R;
 import com.xlib.limeutils.base.Contextor;
-import com.xlib.limeutils.base.Lc;
+
 
 
 
@@ -26,7 +26,7 @@ public class AppInfo {
     //public static final int SPLASH_SCREEN_TIMEOUT = 4500;
 //    public static final int SPLASH_SCREEN_TIMEOUT = 1000;
 
-    private static final String TAG = AppInfo.class.getSimpleName() + Lc.TAG_POSTFIX;
+    private static final String TAG = AppInfo.class.getSimpleName();
 
     //app
     public static final String APP_PACKAGE = context.getPackageName();

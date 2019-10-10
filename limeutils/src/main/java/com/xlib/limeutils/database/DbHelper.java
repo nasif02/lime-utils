@@ -21,7 +21,7 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.xlib.limeutils.base.Lc;
+
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -31,7 +31,7 @@ import java.io.OutputStream;
 public class DbHelper extends SQLiteOpenHelper {
 
 
-    private static final String TAG = DbHelper.class.getSimpleName() + Lc.TAG_POSTFIX;
+    private static final String TAG = DbHelper.class.getSimpleName();
 
 
     private String dbName;

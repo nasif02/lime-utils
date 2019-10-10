@@ -14,12 +14,12 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import android.widget.Toast;
 
-import com.xlib.limeutils.base.Lc;
+
 
 
 public class RTPermission {
 
-    private static final String TAG = RTPermission.class.getSimpleName() + Lc.TAG_POSTFIX;
+    private static final String TAG = RTPermission.class.getSimpleName();
 
     //starts with 1001
     public static final int PRC_RECORD_AUDIO = 1001;

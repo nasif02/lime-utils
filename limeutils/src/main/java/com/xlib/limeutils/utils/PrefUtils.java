@@ -6,7 +6,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.xlib.limeutils.base.Contextor;
-import com.xlib.limeutils.base.Lc;
+
 
 
 /**
@@ -14,7 +14,7 @@ import com.xlib.limeutils.base.Lc;
  */
 public class PrefUtils {
 
-    private static final String TAG = PrefUtils.class.getSimpleName() + Lc.TAG_POSTFIX;
+    private static final String TAG = PrefUtils.class.getSimpleName();
     private static Context context = Contextor.getInstance().getContext();
 
     //system code

@@ -14,7 +14,7 @@ import android.net.Uri;
 import androidx.appcompat.app.AlertDialog;
 import android.util.Log;
 
-import com.xlib.limeutils.base.Lc;
+
 import com.xlib.limeutils.network.NetworkUtils;
 
 
@@ -22,7 +22,7 @@ import com.xlib.limeutils.network.NetworkUtils;
 public class AppRaterUtils {
 
 
-    private static final String TAG = AppRaterUtils.class.getSimpleName() + Lc.TAG_POSTFIX;
+    private static final String TAG = AppRaterUtils.class.getSimpleName();
 
     private static String appTitle = AppInfo.APP_TITLE;
     private static String appPackage = AppInfo.APP_PACKAGE;
