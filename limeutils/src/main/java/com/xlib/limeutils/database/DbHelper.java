@@ -22,6 +22,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 
+import com.xlib.limeutils.base.Contextor;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -33,21 +34,17 @@ public class DbHelper extends SQLiteOpenHelper {
 
     private static final String TAG = DbHelper.class.getSimpleName();
 
+    //private final Context context = Contextor.getInstance().getContext();
 
-    private String dbName;
+    private static String dbName="roboto-lit.ttf";          //will initialize in constructor
     private SQLiteDatabase db;
     private String dbPath;
-    private final Context context;
 
-    //to implement singeliton
-    private static DbHelper dbHelper;
+    private static DbHelper sInstance=null;
 
 
-    //make it private to implement singeliton
-    public DbHelper(Context context, String dbName) {
-
+    private DbHelper(Context context, String dbName) {
         super(context, dbName, null, 1);
-        this.context = context;
         this.dbName = dbName;
         dbPath = "/data/data/" + context.getPackageName() + "/databases/";
 
@@ -57,13 +54,23 @@ public class DbHelper extends SQLiteOpenHelper {
 
     }
 
-    //under construction
-    public static synchronized DbHelper getInstance(Context context) {
-        if (dbHelper == null) {
-            dbHelper = new DbHelper(context, "");
+    public static synchronized DbHelper getInstance(String dbName) {
+        Context context = Contextor.getInstance().getContext();
+        if (sInstance == null) {
+            sInstance = new DbHelper(context, dbName);
         }
-        return dbHelper;
+        return sInstance;
     }
+
+    public static synchronized DbHelper getInstance() {
+        Context context = Contextor.getInstance().getContext();
+        if (sInstance == null) {
+            sInstance = new DbHelper(context, dbName);
+        }
+        return sInstance;
+    }
+
+
 
     /**
      * Creates a empty database on the system and rewrites it with your own
@@ -72,6 +79,8 @@ public class DbHelper extends SQLiteOpenHelper {
     public void createDataBase() throws IOException {
 
         boolean dbExist = checkDataBase();
+        Log.d(TAG, "createDataBase: dbName: " + dbName);
+        Log.d(TAG, "createDataBase: dbExist: " + dbExist);
 
         if (dbExist) {
             // do nothing - database already exist
@@ -135,6 +144,8 @@ public class DbHelper extends SQLiteOpenHelper {
      * handled. This is done by transfering bytestream.
      */
     private void copyDataBase() throws IOException {
+
+        Context context = Contextor.getInstance().getContext();
 
         // Open your local db as the input stream
         InputStream myInput = context.getAssets().open(dbName);
