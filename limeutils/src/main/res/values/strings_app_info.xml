@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--version 0.5-->
-
     <!-- App & Developer -->
     <string name="app_name">Lime Utils</string>
     <string name="app_title">Lime Utils</string>
@@ -11,44 +9,13 @@
     <string name="app_developer_name">Nasif Ahmed</string>
     <string name="app_developer_email">nasif.002@gmail.com</string>
     <string name="app_promo_text">Lime Utils App. Get it on Play Store</string>
-    <string name="app_about_text_extra"></string>
     <string name="app_short_link"></string>
-    <string name="app_local_code">bn</string>
-    <string name="app_drawer_header">Lime Utils</string>
-    <string name="app_"></string>
-
-
-
-    <!-- Developer Option -->
-    <string name="dev_password">xxx</string>
-    <string name="dbg_mode">1</string>
-    <string name="monetization">0</string>
-    <string name="personal_ad_camp">0</string>
-
-
-    <!-- Database -->
-    <string name="db_name1">db1.db</string>
-    <string name="is_db1_enc">0</string>
-    <string name="is_db1_title_enabled">1</string>
-    <string name="is_db1_title_stricted">0</string>
-
-    <string name="db_name2">db2.db</string>
-    <string name="is_db2_enc">0</string>
-    <string name="is_db2_title_enabled">1</string>
-    <string name="is_db2_title_stricted">1</string>
 
     <!--device id-->
     <string name="device_id_note5ai">B60EF355A9E3316015BC52264014A169</string>
     <string name="device_id_note7">95718B77522C2B18A2795F87D29DB217</string>
 
-    <!-- Font default -->
-    <string name="font_en">roboto-light.ttf</string>
-    <string name="font_en_italic">droidserifitalic.ttf</string>
-    <string name="font_en_bold">grobold.ttf</string>
-    <string name="font_bn">solaimanlipinormal.ttf</string>
-    <string name="font_local">solaimanlipinormal.ttf</string>
-
-    <!-- Monetize bangla sms -->
+    <!-- Monetize -->
     <string name="mone_unit_inter_startup"></string>
     <string name="mone_unit_banner_ts"></string>
     <string name="mone_unit_banner_list"></string>

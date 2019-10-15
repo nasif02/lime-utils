@@ -23,6 +23,7 @@ public class NetworkUtils {
     /**
      * Method to check internet is avalable
      * need permission in manifest
+     *
      * @param context
      * @return
      */
