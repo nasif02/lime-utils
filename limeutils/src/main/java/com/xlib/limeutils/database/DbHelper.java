@@ -4,9 +4,6 @@
  * Created by Xplo on 1/4/2016.
  * Copyright (C) 2016 xCode
  * A full Independent Class
- * When you want use this class make sure
- * change db name, change package name in db path
- * write insert function
  */
 
 
@@ -31,44 +28,42 @@ import java.io.OutputStream;
 
 public class DbHelper extends SQLiteOpenHelper {
 
-
-    private static final String TAG = DbHelper.class.getSimpleName();
+    private static final String TAG = "DbHelper";
 
     //private final Context context = Contextor.getInstance().getContext();
 
-    private static String dbName="roboto-lit.ttf";          //will initialize in constructor
+    private String dbName;          //will initialize in constructor
     private SQLiteDatabase db;
     private String dbPath;
 
-    private static DbHelper sInstance=null;
+    //private static DbHelper sInstance=null;
 
 
-    private DbHelper(Context context, String dbName) {
+    public DbHelper(Context context, String dbName) {
         super(context, dbName, null, 1);
         this.dbName = dbName;
         dbPath = "/data/data/" + context.getPackageName() + "/databases/";
 
         //Log.d(TAG, "DbHelper: dbPath: " + dbPath);
-
         //Log.d(TAG, "DbHelper: context.getFilesDir(): " + context.getFilesDir());
 
     }
 
-    public static synchronized DbHelper getInstance(String dbName) {
-        Context context = Contextor.getInstance().getContext();
-        if (sInstance == null) {
-            sInstance = new DbHelper(context, dbName);
-        }
-        return sInstance;
-    }
-
-    public static synchronized DbHelper getInstance() {
-        Context context = Contextor.getInstance().getContext();
-        if (sInstance == null) {
-            sInstance = new DbHelper(context, dbName);
-        }
-        return sInstance;
-    }
+//    public static synchronized DbHelper getInstance(String dbName) {
+//        Context context = Contextor.getInstance().getContext();
+//        if (sInstance == null) {
+//            sInstance = new DbHelper(context, dbName);
+//        }
+//        return sInstance;
+//    }
+//
+//    public static synchronized DbHelper getInstance() {
+//        Context context = Contextor.getInstance().getContext();
+//        if (sInstance == null) {
+//            sInstance = new DbHelper(context, dbName);
+//        }
+//        return sInstance;
+//    }
 
 
 
@@ -78,32 +73,22 @@ public class DbHelper extends SQLiteOpenHelper {
      */
     public void createDataBase() throws IOException {
 
-        boolean dbExist = checkDataBase();
-        Log.d(TAG, "createDataBase: dbName: " + dbName);
+        boolean dbExist = isDbExist();
         Log.d(TAG, "createDataBase: dbExist: " + dbExist);
 
-        if (dbExist) {
-            // do nothing - database already exist
-            return;
-        } else {
+        if(dbExist) return; // do nothing - database already exist
 
-            /*
-             * By calling this method an empty database will be created
-             * into the default system path of your application
-             * so we are gonna be able to overwrite that database with our database.
-             */
+        /*
+         * By calling this method an empty database will be created
+         * into the default system path of your application
+         * so we are gonna be able to overwrite that database with our database.
+         */
+        this.getReadableDatabase();
 
-            this.getReadableDatabase();
-
-            try {
-
-                copyDataBase();
-
-            } catch (IOException e) {
-
-                throw new Error("createDataBase: Error copying database");
-
-            }
+        try {
+            copyDataBase();
+        } catch (IOException e) {
+            throw new Error("createDataBase: Error copying database");
         }
 
     }
@@ -114,28 +99,24 @@ public class DbHelper extends SQLiteOpenHelper {
      *
      * @return true if it exists, false if it doesn't
      */
-    public boolean checkDataBase() {
+    public boolean isDbExist() {
 
         SQLiteDatabase checkDB = null;
 
+        Log.d(TAG, "isDbExist: dbName: " + dbName);
+
         try {
             String myPath = dbPath + dbName;
-            checkDB = SQLiteDatabase.openDatabase(myPath, null,
-                    SQLiteDatabase.OPEN_READONLY);
-
+            checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
         } catch (SQLiteException e) {
-
             // database does't exist yet.
-
         }
 
         if (checkDB != null) {
-
             checkDB.close();
-
         }
 
-        return checkDB != null ? true : false;
+        return checkDB != null;
     }
 
     /**
@@ -178,22 +159,12 @@ public class DbHelper extends SQLiteOpenHelper {
     public void openDataBase() throws SQLException {
 
         // Open the database
-        String myPath = dbPath + dbName;
+        //String myPath = dbPath + dbName;
         //db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
 //        db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);  // read & write
 
         db = this.getWritableDatabase();
-
-
     }
-
-//    public void openDataBase2() throws SQLException {
-//
-//        // Open the database
-//        String myPath = dbPath + dbName;
-//        db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
-//
-//    }
 
     @Override
     public synchronized void close() {
@@ -219,12 +190,6 @@ public class DbHelper extends SQLiteOpenHelper {
     public void onConfigure(SQLiteDatabase db) {
         db.setForeignKeyConstraintsEnabled(true);
     }
-
-    /*
-     * You could return cursors by doing "return myDataBase.query(....)"
-     * so it'd be easy to you to create adapters for your views.
-     * */
-
 
     /**
      * Method to run sql command
@@ -446,7 +411,6 @@ public class DbHelper extends SQLiteOpenHelper {
                 ");";
 
         sql = "CREATE TABLE android_metadata (locale TEXT DEFAULT 'en_US')";
-        sql = "";
 
         Log.d(TAG, "createMetadata: sql: " + sql);
 
@@ -455,8 +419,7 @@ public class DbHelper extends SQLiteOpenHelper {
             Log.d(TAG, "createMetadata: successfull");
 
         } catch (Exception e) {
-            Log.e(TAG, "createMetadata: failed");
-            e.printStackTrace();
+            Log.e(TAG, "createMetadata: failed",e);
 
         }
 
@@ -497,6 +460,20 @@ public class DbHelper extends SQLiteOpenHelper {
 
         }
 
+    }
+
+    /**
+     * demo method to insert data
+     */
+    private void insertDemoItem() {
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("title", "title");
+        contentValues.put("body", "body");
+        contentValues.put("bookmark", 1);
+        contentValues.put("category", "aaa");
+
+        insertRow("demo", contentValues);
     }
 
 
