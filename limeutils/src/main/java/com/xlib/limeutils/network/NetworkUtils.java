@@ -2,13 +2,9 @@ package com.xlib.limeutils.network;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.provider.ContactsContract;
 import android.telephony.TelephonyManager;
-
-import com.xlib.limeutils.base.Contextor;
 
 
 /**

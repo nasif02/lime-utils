@@ -1,4 +1,4 @@
-package com.xlib.limeutils.base;
+package com.xlib.limeutils.core;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

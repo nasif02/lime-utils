@@ -13,10 +13,9 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.util.Log;
 
 import com.xlib.limeutils.R;
-import com.xlib.limeutils.base.Contextor;
+import com.xlib.limeutils.core.Contextor;
 
 
 public class AppInfo {
@@ -32,7 +31,7 @@ public class AppInfo {
     public static final String APP_LINK_SHORT = context.getResources().getString(R.string.app_short_link);
     public static final String PROMO_TEXT = context.getResources().getString(R.string.app_promo_text);
 
-    //DEVELOPER
+    //developer
     public static final String DEVELOPER_CODE = context.getResources().getString(R.string.app_developer_code);
     public static final String DEVELOPER_NAME = context.getResources().getString(R.string.app_developer_name);
     public static final String DEVELOPER_EMAIL = context.getResources().getString(R.string.app_developer_email);

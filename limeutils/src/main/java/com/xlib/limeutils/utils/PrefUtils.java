@@ -2,11 +2,9 @@ package com.xlib.limeutils.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.xlib.limeutils.R;
-import com.xlib.limeutils.base.Contextor;
+import com.xlib.limeutils.core.Contextor;
 
 
 

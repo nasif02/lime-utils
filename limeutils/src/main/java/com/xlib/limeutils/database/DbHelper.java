@@ -19,7 +19,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 
-import com.xlib.limeutils.base.Contextor;
+import com.xlib.limeutils.core.Contextor;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

@@ -2,19 +2,11 @@ package com.xplo.limeutilslib;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ContentValues;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 
-import com.xlib.limeutils.base.Contextor;
+import com.xlib.limeutils.core.Contextor;
 import com.xlib.limeutils.database.DbHelper;
 import com.xlib.limeutils.utils.AppRater;
-import com.xlib.limeutils.utils.PrefUtils;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
