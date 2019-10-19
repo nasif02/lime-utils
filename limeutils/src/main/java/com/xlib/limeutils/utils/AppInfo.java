@@ -12,12 +12,11 @@ package com.xlib.limeutils.utils;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.util.Log;
 
 import com.xlib.limeutils.R;
 import com.xlib.limeutils.base.Contextor;
-
-
 
 
 public class AppInfo {
@@ -41,30 +40,33 @@ public class AppInfo {
 
     /**
      * Method to get app version code
-     * @return  app version code like 9
+     *
+     * @return app version code like 9
      */
     public static int getAppVersionCode() {
         PackageInfo packageInfo = getPackageInfo();
-        if(packageInfo==null) return 0;
+        if (packageInfo == null) return 0;
         return packageInfo.versionCode;
 
     }
 
     /**
      * Method to get app version name
-     * @return  app version name like 2.3.0
+     *
+     * @return app version name like 2.3.0
      */
     public static String getAppVersionName() {
         PackageInfo packageInfo = getPackageInfo();
-        if(packageInfo==null) return "";
+        if (packageInfo == null) return "";
         return packageInfo.versionName;
     }
 
     /**
      * method to get package inof
+     *
      * @return
      */
-    private static PackageInfo getPackageInfo(){
+    private static PackageInfo getPackageInfo() {
         Context context = Contextor.getInstance().getContext();
         try {
             return context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
@@ -76,6 +78,7 @@ public class AppInfo {
 
     /**
      * Method to get about info
+     *
      * @return about info
      */
     public static String getAboutInfo() {
@@ -102,11 +105,10 @@ public class AppInfo {
     }
 
 
-
-
     /**
      * Method to check is this version is pro
-     * @return  true if pro else false
+     *
+     * @return true if pro else false
      */
     public static boolean isPro() {
 
@@ -117,6 +119,23 @@ public class AppInfo {
         //return PrefUtils.getBoolean(Pk.pfIsPro, false);
         return true;
 
+    }
+
+    public static Uri getDeveloperUri() {
+        return Uri.parse("market://search?q=pub:" + DEVELOPER_CODE);
+    }
+
+    public static Uri getDeveloperUriWeb() {
+        return Uri.parse("https://play.google.com/store/apps/developer?id=" + DEVELOPER_CODE);
+    }
+
+
+    public static Uri getAppUri() {
+        return Uri.parse("market://details?id=" + context.getPackageName());
+    }
+
+    public static Uri getAppUriWeb() {
+        return Uri.parse("https://play.google.com/store/apps/details?id=" + context.getPackageName());
     }
 
 

@@ -79,17 +79,13 @@ public class EasyMenu {
 
     public void moreApps() {
         try {
-
-            Uri uri = Uri.parse("market://search?q=pub:" + AppInfo.DEVELOPER_CODE);
-            Intent moreApps = new Intent(Intent.ACTION_VIEW, uri);
+            Intent moreApps = new Intent(Intent.ACTION_VIEW, AppInfo.getDeveloperUri());
             // intent.setAction(Intent.ACTION_VIEW);
             context.startActivity(moreApps);
 
-        } catch (android.content.ActivityNotFoundException anfe) {
+        } catch (android.content.ActivityNotFoundException e) {
 
-            Uri uri = Uri.parse("http://play.google.com/store/apps/developer?id="
-                            + AppInfo.DEVELOPER_CODE);
-            Intent moreApps = new Intent(Intent.ACTION_VIEW, uri);
+            Intent moreApps = new Intent(Intent.ACTION_VIEW, AppInfo.getDeveloperUriWeb());
             // intent.setAction(Intent.ACTION_VIEW);
             context.startActivity(moreApps);
 
@@ -138,27 +134,22 @@ public class EasyMenu {
         } catch (Exception e) {
         }
 
-        Intent intent = new Intent(Intent.ACTION_VIEW,
-                Uri.parse("market://details?id=" + context.getPackageName()));
-        context.startActivity(intent);
-
     }
 
-    public void marketLink(String appPackageName) {
+    public void goToPlayStore() {
         try {
-            Intent intent = new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("market://details?id=" + appPackageName));
+            Intent intent = new Intent(Intent.ACTION_VIEW, AppInfo.getAppUri());
             context.startActivity(intent);
-
-        } catch (android.content.ActivityNotFoundException anfe) {
-
-
-            Intent intent = new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName));
+        } catch (android.content.ActivityNotFoundException e) {
+            Intent intent = new Intent(Intent.ACTION_VIEW,AppInfo.getAppUriWeb());
             context.startActivity(intent);
 
         }
     }
+
+
+
+
 
 
 

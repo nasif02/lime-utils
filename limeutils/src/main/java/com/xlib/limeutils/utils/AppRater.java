@@ -95,8 +95,12 @@ public class AppRater {
 
                 dontShowAgain();
 
-                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri
-                        .parse("market://details?id=" + appPackage)));
+                try {
+                    context.startActivity(new Intent(Intent.ACTION_VIEW, Uri
+                            .parse("market://details?id=" + appPackage)));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
                 dialog.dismiss();
             }
