@@ -71,17 +71,8 @@ public class EasyMenu {
 
     public void shareTextWithClip(String text) {
 
-        try {
-            clipData = ClipData.newPlainText("text", text);
-            clipboardManager.setPrimaryClip(clipData);
-
-            Intent intent = new Intent();
-            intent.setAction(Intent.ACTION_SEND);
-            intent.setType("text/plain");
-            intent.putExtra(Intent.EXTRA_TEXT, text);
-            context.startActivity(Intent.createChooser(intent, "Share By"));
-        } catch (Exception e) {
-        }
+        addToClip(text);
+        shareText(text);
 
     }
 
@@ -96,8 +87,7 @@ public class EasyMenu {
 
         } catch (android.content.ActivityNotFoundException anfe) {
 
-            Uri uri = Uri
-                    .parse("http://play.google.com/store/apps/developer?id="
+            Uri uri = Uri.parse("http://play.google.com/store/apps/developer?id="
                             + AppInfo.DEVELOPER_CODE);
             Intent moreApps = new Intent(Intent.ACTION_VIEW, uri);
             // intent.setAction(Intent.ACTION_VIEW);
@@ -109,8 +99,7 @@ public class EasyMenu {
     public void openAWebsite(String url) {
         try {
 
-            Uri uri = Uri
-                    .parse(url);
+            Uri uri = Uri.parse(url);
             Intent moreApps = new Intent(Intent.ACTION_VIEW, uri);
             // intent.setAction(Intent.ACTION_VIEW);
             context.startActivity(moreApps);
@@ -129,7 +118,7 @@ public class EasyMenu {
             // Email.setType("message/rfc822");
 
             Email.putExtra(Intent.EXTRA_EMAIL,
-                    new String[]{"nasif.002@gmail.com"});
+                    new String[]{AppInfo.DEVELOPER_EMAIL});
             Email.putExtra(Intent.EXTRA_SUBJECT, "Feedback " + AppInfo.APP_TITLE);
             Email.putExtra(Intent.EXTRA_TEXT, "Dear Developer,\n..." + "");
             context.startActivity(Intent.createChooser(Email, "Send Feedback"));
@@ -141,14 +130,16 @@ public class EasyMenu {
     public void rate() {
         try {
 
-            AppRaterUtils.showRateDialog(context);
+            new AppRater.Builder(context)
+                    .build()
+                    .showRateDialog();
             return;
 
         } catch (Exception e) {
         }
 
         Intent intent = new Intent(Intent.ACTION_VIEW,
-                Uri.parse("market://details?id=" + AppInfo.APP_PACKAGE));
+                Uri.parse("market://details?id=" + context.getPackageName()));
         context.startActivity(intent);
 
     }

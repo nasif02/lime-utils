@@ -24,13 +24,9 @@ public class AppInfo {
 
     private static Context context = Contextor.getInstance().getContext();
 
-    //public static final int SPLASH_SCREEN_TIMEOUT = 4500;
-//    public static final int SPLASH_SCREEN_TIMEOUT = 1000;
-
     private static final String TAG = AppInfo.class.getSimpleName();
 
     //app
-    public static final String APP_PACKAGE = context.getPackageName();
     public static final String APP_NAME = context.getResources().getString(R.string.app_name);
     public static final String APP_TITLE = context.getResources().getString(R.string.app_title);
     public static final String APP_LINK = "https://play.google.com/store/apps/details?id=" + context.getPackageName();
@@ -41,13 +37,6 @@ public class AppInfo {
     public static final String DEVELOPER_CODE = context.getResources().getString(R.string.app_developer_code);
     public static final String DEVELOPER_NAME = context.getResources().getString(R.string.app_developer_name);
     public static final String DEVELOPER_EMAIL = context.getResources().getString(R.string.app_developer_email);
-
-
-
-//    //admob  this should be here in this class
-//    public static final String MONE_UNIT_INTER_STARTUP = context.getResources().getString(R.string.mone_unit_inter_startup);
-//    public static final String MONE_UNIT_BANNER_TS = context.getResources().getString(R.string.mone_unit_banner_ts);
-//    public static final String MONE_UNIT_BANNER_LIST = context.getResources().getString(R.string.mone_unit_banner_list);
 
 
     /**
@@ -76,6 +65,7 @@ public class AppInfo {
      * @return
      */
     private static PackageInfo getPackageInfo(){
+        Context context = Contextor.getInstance().getContext();
         try {
             return context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
         } catch (PackageManager.NameNotFoundException e) {
@@ -99,7 +89,7 @@ public class AppInfo {
 
         s = APP_TITLE + pro + "\nVersion : " + getAppVersionName()
                 + "\nCopyright © 2016, Xplo" + "\nDeveloper : " + DEVELOPER_CODE
-                + "\nContact : " + DEVELOPER_EMAIL + "\n" + ABOUT_TEXT_EXTRA
+                + "\nContact : " + DEVELOPER_EMAIL
                 + "";
 
         return s;
@@ -111,30 +101,7 @@ public class AppInfo {
         return s;
     }
 
-    public static boolean isDbgModeEnabled() {
 
-        String s = context.getResources().getString(R.string.dbg_mode);
-        return s.equals("1");
-
-    }
-
-    public static boolean isAdEnabled() {
-
-        String s = context.getResources().getString(R.string.monetization);
-
-        //return (s.equals("true"))? true:false;
-        return s.equals("1");
-
-    }
-
- public static boolean isPersonalAdCampEnabled() {
-
-        String s = context.getResources().getString(R.string.personal_ad_camp);
-
-        //return (s.equals("true"))? true:false;
-        return s.equals("1");
-
-    }
 
 
     /**
