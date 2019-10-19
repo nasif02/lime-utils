@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 public class RTPermission {
 
-    private static final String TAG = RTPermission.class.getSimpleName();
+    private static final String TAG = "RTPermission";
 
     //starts with 1001
     public static final int PRC_RECORD_AUDIO = 1001;

@@ -28,9 +28,9 @@ public class PrefUtils {
     }
 
     private PrefUtils() {
-        Context appContext = Contextor.getInstance().getContext();
-        sp = appContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE );
-        //sp = PreferenceManager.getDefaultSharedPreferences(appContext);
+        Context context = Contextor.getInstance().getContext();
+        sp = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE );
+        //sp = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
 

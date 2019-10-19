@@ -21,9 +21,9 @@ public class Pk {
     public static final String IS_INTERTIAL_EN_2 = "IS_INTERTIAL_EN_2";
 
     //int or long
-    public static final String LAUNCH_COUNTER = "LAUNCH_COUNTER";
-    public static final String DONT_SHOW_AGAIN = "DONT_SHOW_AGAIN";
-    public static final String DATE_FIRST_LAUNCH = "DATE_FIRST_LAUNCH";
+//    public static final String LAUNCH_COUNTER = "LAUNCH_COUNTER";
+//    public static final String DONT_SHOW_AGAIN = "DONT_SHOW_AGAIN";
+//    public static final String DATE_FIRST_LAUNCH = "DATE_FIRST_LAUNCH";
     public static final String LAST_OP = "LAST_OP";
 
 
