@@ -12,6 +12,7 @@ package com.xlib.limeutils.utils;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.net.Uri;
 
 import com.xlib.limeutils.R;
@@ -20,21 +21,23 @@ import com.xlib.limeutils.core.Contextor;
 
 public class AppInfo {
 
-    private static Context context = Contextor.getInstance().getContext();
+    private static final String TAG = "AppInfo";
 
-    private static final String TAG = AppInfo.class.getSimpleName();
+    public static Resources resources = Contextor.getInstance().getContext().getResources();
+
 
     //app
-    public static final String APP_NAME = context.getResources().getString(R.string.app_name);
-    public static final String APP_TITLE = context.getResources().getString(R.string.app_title);
-    public static final String APP_LINK = "https://play.google.com/store/apps/details?id=" + context.getPackageName();
-    public static final String APP_LINK_SHORT = context.getResources().getString(R.string.app_short_link);
-    public static final String PROMO_TEXT = context.getResources().getString(R.string.app_promo_text);
+    public static final String APP_PACKAGE = Contextor.getInstance().getContext().getPackageName();
+    public static final String APP_NAME = resources.getString(R.string.app_name);
+    public static final String APP_TITLE = resources.getString(R.string.app_title);
+    public static final String APP_LINK = "https://play.google.com/store/apps/details?id=" + APP_PACKAGE;
+    public static final String APP_LINK_SHORT = resources.getString(R.string.app_short_link);
+    public static final String PROMO_TEXT = resources.getString(R.string.app_promo_text);
 
     //developer
-    public static final String DEVELOPER_CODE = context.getResources().getString(R.string.app_developer_code);
-    public static final String DEVELOPER_NAME = context.getResources().getString(R.string.app_developer_name);
-    public static final String DEVELOPER_EMAIL = context.getResources().getString(R.string.app_developer_email);
+    public static final String DEVELOPER_CODE = resources.getString(R.string.app_developer_code);
+    public static final String DEVELOPER_NAME = resources.getString(R.string.app_developer_name);
+    public static final String DEVELOPER_EMAIL = resources.getString(R.string.app_developer_email);
 
 
     /**
@@ -130,11 +133,11 @@ public class AppInfo {
 
 
     public static Uri getAppUri() {
-        return Uri.parse("market://details?id=" + context.getPackageName());
+        return Uri.parse("market://details?id=" + APP_PACKAGE);
     }
 
     public static Uri getAppUriWeb() {
-        return Uri.parse("https://play.google.com/store/apps/details?id=" + context.getPackageName());
+        return Uri.parse("https://play.google.com/store/apps/details?id=" + APP_PACKAGE);
     }
 
 

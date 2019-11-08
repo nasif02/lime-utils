@@ -15,15 +15,15 @@ import android.content.Context;
 public class Contextor {
 
     @SuppressLint("StaticFieldLeak")
-    private static Contextor sInstance;
+    private static Contextor instance;
 
     private Context context;
 
     public static Contextor getInstance() {
-        if (sInstance == null) {
-            sInstance = new Contextor();
+        if (instance == null) {
+            instance = new Contextor();
         }
-        return sInstance;
+        return instance;
     }
 
     public void init(Context context) {

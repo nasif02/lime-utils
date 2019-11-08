@@ -15,14 +15,18 @@ public class PrefUtils {
 
     private static final String TAG = "PrefUtils";
 
-    private static PrefUtils sInstance=null;
+    private static PrefUtils instance =null;
     private SharedPreferences sp;
     private final String PREF_NAME = "shared_pref";
 
+
+    public static final String LAUNCH_COUNTER = "LAUNCH_COUNTER";
+
+
     public static synchronized PrefUtils getInstance(){
-        if(sInstance == null)
-            sInstance = new PrefUtils();
-        return sInstance;
+        if(instance == null)
+            instance = new PrefUtils();
+        return instance;
     }
 
     private PrefUtils() {
