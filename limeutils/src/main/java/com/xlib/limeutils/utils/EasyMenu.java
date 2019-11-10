@@ -27,7 +27,7 @@ public class EasyMenu {
 
         AlertDialog.Builder ab = new AlertDialog.Builder(context);
         ab.setTitle("about");
-        ab.setMessage(AppInfo.getAboutInfo());
+        ab.setMessage(AppInfo.INSTANCE.getAboutInfo());
         ab.setCancelable(true);
         ab.setNeutralButton("Ok",null);
         ab.show();
@@ -36,7 +36,7 @@ public class EasyMenu {
 
     public void shareApp() {
 
-        String textToShareAppPromote = AppInfo.getTextToShareApp();
+        String textToShareAppPromote = AppInfo.INSTANCE.getTextToShareApp();
         clipData = ClipData.newPlainText("text", textToShareAppPromote);
         clipboardManager.setPrimaryClip(clipData);
 
@@ -45,7 +45,7 @@ public class EasyMenu {
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT, textToShareAppPromote);
         context.startActivity(Intent.createChooser(intent,
-                "Share " + AppInfo.APP_TITLE));
+                "Share " + AppInfo.INSTANCE.getAPP_TITLE()));
 
     }
 
@@ -79,13 +79,13 @@ public class EasyMenu {
 
     public void moreApps() {
         try {
-            Intent moreApps = new Intent(Intent.ACTION_VIEW, AppInfo.getDeveloperUri());
+            Intent moreApps = new Intent(Intent.ACTION_VIEW, AppInfo.INSTANCE.getDeveloperUri());
             // intent.setAction(Intent.ACTION_VIEW);
             context.startActivity(moreApps);
 
         } catch (android.content.ActivityNotFoundException e) {
 
-            Intent moreApps = new Intent(Intent.ACTION_VIEW, AppInfo.getDeveloperUriWeb());
+            Intent moreApps = new Intent(Intent.ACTION_VIEW, AppInfo.INSTANCE.getDeveloperUriWeb());
             // intent.setAction(Intent.ACTION_VIEW);
             context.startActivity(moreApps);
 
@@ -114,8 +114,8 @@ public class EasyMenu {
             // Email.setType("message/rfc822");
 
             Email.putExtra(Intent.EXTRA_EMAIL,
-                    new String[]{AppInfo.DEVELOPER_EMAIL});
-            Email.putExtra(Intent.EXTRA_SUBJECT, "Feedback " + AppInfo.APP_TITLE);
+                    new String[]{AppInfo.INSTANCE.getDEVELOPER_EMAIL()});
+            Email.putExtra(Intent.EXTRA_SUBJECT, "Feedback " + AppInfo.INSTANCE.getAPP_TITLE());
             Email.putExtra(Intent.EXTRA_TEXT, "Dear Developer,\n..." + "");
             context.startActivity(Intent.createChooser(Email, "Send Feedback"));
 
@@ -138,10 +138,10 @@ public class EasyMenu {
 
     public void goToPlayStore() {
         try {
-            Intent intent = new Intent(Intent.ACTION_VIEW, AppInfo.getAppUri());
+            Intent intent = new Intent(Intent.ACTION_VIEW, AppInfo.INSTANCE.getAppUri());
             context.startActivity(intent);
         } catch (android.content.ActivityNotFoundException e) {
-            Intent intent = new Intent(Intent.ACTION_VIEW,AppInfo.getAppUriWeb());
+            Intent intent = new Intent(Intent.ACTION_VIEW, AppInfo.INSTANCE.getAppUriWeb());
             context.startActivity(intent);
 
         }
