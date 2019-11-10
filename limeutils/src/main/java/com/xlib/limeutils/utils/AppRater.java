@@ -17,9 +17,6 @@ import android.net.Uri;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.xlib.limeutils.R;
-
-
 /**
  * Need This Context to show dialog
  */
@@ -27,13 +24,13 @@ public class AppRater {
 
     private static final String TAG = "AppRater";
 
-    private Context context;
     private int dayThreshold;
     private int counterThreshold;
     private String posButtonText;
     private String negButtonText;
     private String title;
     private String message;
+    private boolean isNetworkCheck;
 
 
     private static final String AR_LAUNCH_COUNTER = "AR_LAUNCH_COUNTER";
@@ -42,16 +39,16 @@ public class AppRater {
 
 
     public AppRater(Builder builder) {
-        this.context = builder.context;
         this.dayThreshold = builder.dayThreshold;
         this.counterThreshold = builder.counterThreshold;
         this.posButtonText = builder.posButtonText;
         this.negButtonText = builder.negButtonText;
         this.title = builder.title;
         this.message = builder.message;
+        this.isNetworkCheck = builder.isNetworkCheck;
     }
 
-    public void appLaunched() {
+    public void appLaunched(Context context) {
 
         if (PrefUtils.getInstance().getBoolean(AR_DONT_SHOW_AGAIN, false)) {
             return;
@@ -72,14 +69,16 @@ public class AppRater {
         if (launchCounter < counterThreshold) return;
         if (!isPassDayThreshold(dateFirstLaunch)) return;
 
-//        if (!isConnectedToInternet(context)) return;
+        if (isNetworkCheck) {
+            if(!isNetworkConnected(context)) return;
+        }
 
-        showRateDialog();
+        showRateDialog(context);
 
     }
 
     //need this context
-    public void showRateDialog() {
+    public void showRateDialog(final Context context) {
 
         final String appPackage = context.getPackageName();
 
@@ -146,7 +145,7 @@ public class AppRater {
      * @param context
      * @return
      */
-    public static boolean isConnectedToInternet(Context context) {
+    public static boolean isNetworkConnected(Context context) {
         ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivity != null) {
             @SuppressLint("MissingPermission") NetworkInfo[] info = connectivity.getAllNetworkInfo();
@@ -163,7 +162,6 @@ public class AppRater {
 
     public static class Builder {
 
-        private Context context;
         private int dayThreshold = 3;
         private int counterThreshold = 7;
         private String posButtonText = "Rate";
@@ -171,9 +169,10 @@ public class AppRater {
         private String title = "Rate";
         private String message = "If you enjoy " + AppInfo.APP_TITLE
                 + ", please take a moment to rate it. Thanks for your support.";
+        private boolean isNetworkCheck=true;
 
-        public Builder(Context context) {
-            this.context = context;
+        public Builder() {
+
         }
 
         public Builder setDayThreshold(int dayThreshold) {
@@ -203,6 +202,11 @@ public class AppRater {
 
         public Builder setMessage(String message) {
             this.message = message;
+            return this;
+        }
+
+        public Builder setNetworkCheck(boolean isNetworkCheck) {
+            this.isNetworkCheck = isNetworkCheck;
             return this;
         }
 
