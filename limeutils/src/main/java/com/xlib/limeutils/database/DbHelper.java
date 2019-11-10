@@ -30,14 +30,9 @@ public class DbHelper extends SQLiteOpenHelper {
 
     private static final String TAG = "DbHelper";
 
-    //private final Context context = Contextor.getInstance().getContext();
-
     private String dbName;          //will initialize in constructor
     private SQLiteDatabase db;
     private String dbPath;
-
-    //private static DbHelper sInstance=null;
-
 
     public DbHelper(Context context, String dbName) {
         super(context, dbName, null, 1);
@@ -48,24 +43,6 @@ public class DbHelper extends SQLiteOpenHelper {
         //Log.d(TAG, "DbHelper: context.getFilesDir(): " + context.getFilesDir());
 
     }
-
-//    public static synchronized DbHelper getInstance(String dbName) {
-//        Context context = Contextor.getInstance().getContext();
-//        if (sInstance == null) {
-//            sInstance = new DbHelper(context, dbName);
-//        }
-//        return sInstance;
-//    }
-//
-//    public static synchronized DbHelper getInstance() {
-//        Context context = Contextor.getInstance().getContext();
-//        if (sInstance == null) {
-//            sInstance = new DbHelper(context, dbName);
-//        }
-//        return sInstance;
-//    }
-
-
 
     /**
      * Creates a empty database on the system and rewrites it with your own
