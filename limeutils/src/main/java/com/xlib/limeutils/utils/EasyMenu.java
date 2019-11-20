@@ -126,9 +126,9 @@ public class EasyMenu {
     public void rate() {
         try {
 
-            new AppRater.Builder(context)
+            new AppRater.Builder()
                     .build()
-                    .showRateDialog();
+                    .showRateDialog(context);
             return;
 
         } catch (Exception e) {
