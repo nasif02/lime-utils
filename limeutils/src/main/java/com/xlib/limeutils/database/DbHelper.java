@@ -144,6 +144,12 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     @Override
+    public void onOpen(SQLiteDatabase db) {
+        super.onOpen(db);
+        db.disableWriteAheadLogging();
+    }
+
+    @Override
     public synchronized void close() {
 
         if (db != null)
