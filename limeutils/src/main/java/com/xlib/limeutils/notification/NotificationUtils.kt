@@ -37,7 +37,7 @@ object NotificationUtils {
         if (pendingIntent != null) {
             mBuilder.setContentIntent(pendingIntent)
         }
-        mBuilder.setSmallIcon(R.mipmap.ic_launcher_round)
+        mBuilder.setSmallIcon(R.mipmap.ic_launcher)
         mBuilder.setContentTitle(notBundle.title)
         mBuilder.setContentText(notBundle.body)
         mBuilder.priority = Notification.PRIORITY_MAX
@@ -66,7 +66,7 @@ object NotificationUtils {
         if (pendingIntent != null) {
             mBuilder.setContentIntent(pendingIntent)
         }
-        mBuilder.setSmallIcon(R.mipmap.ic_launcher_round)
+        mBuilder.setSmallIcon(R.mipmap.ic_launcher)
         mBuilder.setContentTitle(notBundle.title)
         mBuilder.setContentText(notBundle.body)
         mBuilder.priority = Notification.PRIORITY_MAX
