@@ -1,12 +1,11 @@
 package com.xplo.limeutilslib;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.xlib.limeutils.core.Contextor;
 import com.xlib.limeutils.database.DbHelper;
-import com.xlib.limeutils.utils.AppRater;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,11 +20,11 @@ public class MainActivity extends AppCompatActivity {
 
         Contextor.getInstance().init(getApplicationContext());
 
-        new AppRater.Builder(this)
-                .setDayThreshold(0)
-                .setCounterThreshold(3)
-                .build()
-                .appLaunched();
+//        new AppRater.Builder()
+//                .setDayThreshold(4)
+//                .setCounterThreshold(3)
+//                .build()
+//                .appLaunched();
 
 
     }
