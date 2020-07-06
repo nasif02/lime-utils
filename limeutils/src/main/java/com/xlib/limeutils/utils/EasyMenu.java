@@ -5,6 +5,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+
 import androidx.appcompat.app.AlertDialog;
 
 public class EasyMenu {
@@ -14,7 +15,6 @@ public class EasyMenu {
     private ClipData clipData;
 
     /**
-     *
      * @param context pass this, its needed
      */
     public EasyMenu(Context context) {
@@ -29,7 +29,7 @@ public class EasyMenu {
         ab.setTitle("about");
         ab.setMessage(AppInfo.INSTANCE.getAboutInfo());
         ab.setCancelable(true);
-        ab.setNeutralButton("Ok",null);
+        ab.setNeutralButton("Ok", null);
         ab.show();
 
     }
@@ -146,11 +146,6 @@ public class EasyMenu {
 
         }
     }
-
-
-
-
-
 
 
 }

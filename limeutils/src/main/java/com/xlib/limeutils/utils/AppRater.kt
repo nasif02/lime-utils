@@ -9,12 +9,10 @@ package com.xlib.limeutils.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.net.Uri
-
 import androidx.appcompat.app.AlertDialog
 
 class AppRater(builder: Builder) {
@@ -40,19 +38,19 @@ class AppRater(builder: Builder) {
 
     fun appLaunched(context: Context) {
 
-        if (PrefUtils.getInstance().getBoolean(AR_DONT_SHOW_AGAIN, false)) {
+        if (PrefUtils.getInstance(context).getBoolean(AR_DONT_SHOW_AGAIN, false)) {
             return
         }
 
         // Increment launch counter
-        val launchCounter = PrefUtils.getInstance().getLong(AR_LAUNCH_COUNTER, 0) + 1
-        PrefUtils.getInstance().putLong(AR_LAUNCH_COUNTER, launchCounter)
+        val launchCounter = PrefUtils.getInstance(context).getLong(AR_LAUNCH_COUNTER, 0) + 1
+        PrefUtils.getInstance(context).putLong(AR_LAUNCH_COUNTER, launchCounter)
 
         // Get date of first launch
-        var dateFirstLaunch = PrefUtils.getInstance().getLong(AR_DATE_FIRST_LAUNCH, 0)
+        var dateFirstLaunch = PrefUtils.getInstance(context).getLong(AR_DATE_FIRST_LAUNCH, 0)
         if (dateFirstLaunch == 0L) {
             dateFirstLaunch = System.currentTimeMillis()
-            PrefUtils.getInstance().putLong(AR_DATE_FIRST_LAUNCH, dateFirstLaunch)
+            PrefUtils.getInstance(context).putLong(AR_DATE_FIRST_LAUNCH, dateFirstLaunch)
         }
 
         // Wait at least n days and launch threshold before opening
@@ -79,7 +77,7 @@ class AppRater(builder: Builder) {
         builder.setCancelable(false)
 
         builder.setPositiveButton(posButtonText) { dialog, which ->
-            dontShowAgain()
+            dontShowAgain(context)
 
             try {
                 context.startActivity(Intent(Intent.ACTION_VIEW, Uri
@@ -93,7 +91,7 @@ class AppRater(builder: Builder) {
 
         builder.setNegativeButton(negButtonText) { dialog, which ->
             dialog.dismiss()
-            resetCounter()
+            resetCounter(context)
         }
 
         val mAlertDialog = builder.create()
@@ -101,13 +99,13 @@ class AppRater(builder: Builder) {
 
     }
 
-    private fun resetCounter() {
-        PrefUtils.getInstance().putLong(AR_LAUNCH_COUNTER, 0)
+    private fun resetCounter(context: Context) {
+        PrefUtils.getInstance(context).putLong(AR_LAUNCH_COUNTER, 0)
     }
 
 
-    private fun dontShowAgain() {
-        PrefUtils.getInstance().putBoolean(AR_DONT_SHOW_AGAIN, true)
+    private fun dontShowAgain(context: Context) {
+        PrefUtils.getInstance(context).putBoolean(AR_DONT_SHOW_AGAIN, true)
     }
 
     private fun isPassDayThreshold(dateFirstLaunch: Long): Boolean {

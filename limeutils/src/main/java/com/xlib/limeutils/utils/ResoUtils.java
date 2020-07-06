@@ -22,7 +22,7 @@ public class ResoUtils {
      * @param context
      * @return
      */
-    public static int dip2px(Context context,float dp) {
+    public static int dip2px(Context context, float dp) {
         return (int) (dp * context.getResources().getDisplayMetrics().density + 0.5);
     }
 
@@ -33,7 +33,7 @@ public class ResoUtils {
      * @param context
      * @return
      */
-    public static float px2dip( Context context, int px) {
+    public static float px2dip(Context context, int px) {
         return (float) px / context.getResources().getDisplayMetrics().density;
     }
 

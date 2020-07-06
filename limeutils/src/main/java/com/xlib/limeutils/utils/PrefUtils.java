@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.xlib.limeutils.core.Contextor;
-
 
 
 /**
@@ -19,18 +17,13 @@ public class PrefUtils {
     private SharedPreferences sp;
     private final String PREF_NAME = "shared_pref";
 
-
-    public static final String LAUNCH_COUNTER = "LAUNCH_COUNTER";
-
-
-    public static synchronized PrefUtils getInstance(){
+    public static synchronized PrefUtils getInstance(Context context){
         if(instance == null)
-            instance = new PrefUtils();
+            instance = new PrefUtils(context);
         return instance;
     }
 
-    private PrefUtils() {
-        Context context = Contextor.getInstance().getContext();
+    private PrefUtils(Context context) {
         sp = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE );
         //sp = PreferenceManager.getDefaultSharedPreferences(context);
     }

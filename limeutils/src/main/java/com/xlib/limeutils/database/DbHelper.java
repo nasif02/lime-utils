@@ -18,9 +18,6 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-
-import com.xlib.limeutils.core.Contextor;
-
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,11 +30,13 @@ public class DbHelper extends SQLiteOpenHelper {
     private String dbName;          //will initialize in constructor
     private SQLiteDatabase db;
     private String dbPath;
+    private Context context;
 
     public DbHelper(Context context, String dbName) {
         super(context, dbName, null, 1);
         this.dbName = dbName;
         dbPath = "/data/data/" + context.getPackageName() + "/databases/";
+        this.context = context;
 
         //Log.d(TAG, "DbHelper: dbPath: " + dbPath);
         //Log.d(TAG, "DbHelper: context.getFilesDir(): " + context.getFilesDir());
@@ -53,7 +52,7 @@ public class DbHelper extends SQLiteOpenHelper {
         boolean dbExist = isDbExist();
         Log.d(TAG, "createDataBase: dbExist: " + dbExist);
 
-        if(dbExist) return; // do nothing - database already exist
+        if (dbExist) return; // do nothing - database already exist
 
         /*
          * By calling this method an empty database will be created
@@ -103,7 +102,7 @@ public class DbHelper extends SQLiteOpenHelper {
      */
     private void copyDataBase() throws IOException {
 
-        Context context = Contextor.getInstance().getContext();
+        //Context context = Contextor.getInstance().getContext();
 
         // Open your local db as the input stream
         InputStream myInput = context.getAssets().open(dbName);
@@ -402,7 +401,7 @@ public class DbHelper extends SQLiteOpenHelper {
             Log.d(TAG, "createMetadata: successfull");
 
         } catch (Exception e) {
-            Log.e(TAG, "createMetadata: failed",e);
+            Log.e(TAG, "createMetadata: failed", e);
 
         }
 
